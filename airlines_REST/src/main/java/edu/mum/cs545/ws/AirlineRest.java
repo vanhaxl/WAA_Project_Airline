@@ -40,13 +40,13 @@ public class AirlineRest {
     }
 
     @Path("update")
-    @POST
+    @PUT
     public Airline update(Airline airline){
         return airlineService.update(airline);
     }
 
     @Path("find")
-    @GET
+    @POST
     public Airline find(Airline airline){
         return airlineService.find(airline);
     }
@@ -58,7 +58,7 @@ public class AirlineRest {
     }
 
     @Path("findByFlight")
-    @GET
+    @POST
     public List<Airline> findByFlight(Flight flight){
         return airlineService.findByFlight(flight);
     }
