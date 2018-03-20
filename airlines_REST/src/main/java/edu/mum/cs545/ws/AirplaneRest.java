@@ -64,7 +64,7 @@ public class AirplaneRest {
     }
 
     @Path("findByModel/{model}")
-    @POST
+    @GET
     public List<Airplane> findByModel(@PathParam("model") String model) {
         return airplaneService.findByModel(model);
     }
