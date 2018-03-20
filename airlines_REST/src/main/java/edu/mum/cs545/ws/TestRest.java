@@ -12,7 +12,9 @@ public class TestRest {
 
     @GET
     public String helloWorld(@DefaultValue("Gorgeous") @QueryParam("name") String name) {
+        String a = "";
         return "Hello REST " + name + "!";
+
     }
 
 }
