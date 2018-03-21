@@ -3,29 +3,46 @@ package cs545.airline.beans;
 import cs545.airline.model.Airline;
 import cs545.airline.service.AirlineService;
 
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.SessionScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.List;
 
+
 @Named
-@SessionScoped
+@RequestScoped
 public class AirlineBean implements Serializable{
     private static final long serialVersionUID = 1L;
 
     @Inject
     AirlineService airlineService;
 
-    private List<Airline> airlineList;
+    private Airline currentAirline;
 
-    @PostConstruct
-    public void initialize(){
-        airlineList = airlineService.findAll();
+    public List<Airline> getAirlines(){
+        return airlineService.findAll();
     }
-    public List<Airline> getAirlineList(){
-        return airlineList;
+
+    public Airline getCurrentAirline(){
+        return this.currentAirline;
     }
+
+    public String deleteAirline(long id) {
+        currentAirline = new Airline();
+        currentAirline.setId(id);
+        currentAirline = airlineService.find(currentAirline);
+        if(currentAirline.getFlights().isEmpty()) {
+            airlineService.delete(currentAirline);
+        }
+        return "airlines";
+    }
+    public String save(Airline airline) {
+        airlineService.create(airline);
+        return "airlineList";
+    }
+
+
 
 }
+

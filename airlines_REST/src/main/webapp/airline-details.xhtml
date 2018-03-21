@@ -10,7 +10,7 @@
         <f:metadata>
             <f:viewAction action="#{airlineDetailBean.onload}"/>
         </f:metadata>
-        <ui:param name="pageTitle" value="Airline Details"/>
+        <ui:define name="title">Airline Details</ui:define>
         <ui:define name="panel-top">
             <section>
                 <h1>Tell us about your airline</h1>
@@ -20,12 +20,12 @@
         </ui:define>
         <ui:define name="panel-main">
             <section>
-                <h:messages styleClass="validation-messages"/>
+               <h:messages styleClass="validation-messages" for="name" />
                 <h:form>
                     <h:panelGrid columns="2" styleClass="form-grid" columnClasses="form-column-label,form-column-input">
                         <h:outputLabel for="name">Name</h:outputLabel>
-                        <h:inputText id="name" value="#{airlineDetailBean.airline.name}" size="20"/>
-
+                        <h:inputText id="name" value="#{airlineDetailBean.name}" size="20" label="Name should't have to be empty" required="true" />
+                                    
                         <h:outputText value=""/>
                         <h:commandButton value="Submit" action="#{airlineDetailBean.submit}"/>
                     </h:panelGrid>
@@ -35,3 +35,4 @@
     </ui:composition>
 </f:view>
 </html>
+
