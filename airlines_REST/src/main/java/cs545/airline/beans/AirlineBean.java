@@ -9,6 +9,7 @@ import javax.inject.Named;
 import java.io.Serializable;
 import java.util.List;
 
+
 @Named
 @RequestScoped
 public class AirlineBean implements Serializable{
@@ -27,9 +28,9 @@ public class AirlineBean implements Serializable{
         return this.currentAirline;
     }
     public String updateAirline(long id) {
-        this.currentAirline = new Airline();
-        this.currentAirline.setId(id);
-        this.currentAirline = airlineService.find(currentAirline);
+        currentAirline = new Airline();
+        currentAirline.setId(id);
+        currentAirline = airlineService.find(currentAirline);
         return "airline-details";
     }
 
