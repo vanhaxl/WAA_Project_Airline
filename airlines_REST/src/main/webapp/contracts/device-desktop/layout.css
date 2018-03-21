@@ -67,27 +67,23 @@ body > footer > p {
     padding-right: 1em;
 }
 
-.shoppingcart-table {
+.airline-table {
     width: 100%;
 }
 
-.shoppingcart-header {
+.airline-header {
     padding: 0.25em;
     text-align: left;
     font-weight: bold;
 }
 
-.shoppingcart-col-name {
+.airline-col-name {
     padding: 0.25em;
     text-align: left;
 }
 
-.shoppingcart-col-price, .shoppingcart-col-quantity, .shoppingcart-col-amount {
-    padding: 0.25em;
-    text-align: right;
-}
 
-.shoppingcart-footer {
+.airline-footer {
     padding: 0.25em;
     font-weight: bold;
     text-align: right;

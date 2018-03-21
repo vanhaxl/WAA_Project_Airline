@@ -41,20 +41,20 @@ body > footer {
     color: #e5e5e5;
 }
 
-.shoppingcart-header {
+.airline-header {
     background-color: #f15b2a;
     color: white;
 }
 
-.shoppingcart-row-odd {
+.airline-row-odd {
     background-color: #e0e0e0;
 }
 
-.shoppingcart-row-even {
+.airline-row-even {
     background-color: #f0f0f0;
 }
 
-.shoppingcart-footer {
+.airline-footer {
     background-color: #2a9fbc;
     color: white;
 }
