@@ -16,9 +16,6 @@ public class AirlineDetailBean implements Serializable {
     @Inject
     private AirlineBean airlineBean;
 
-    @Inject
-    AirlineService airlineService;
-
     private Airline airline;
 
     public Airline getAirline() {
@@ -26,12 +23,17 @@ public class AirlineDetailBean implements Serializable {
     }
 
     public void onload() {
-        airline = airlineBean.hasAirline() ? airlineBean.getCurrentAirline() : new Airline();
+        if(airlineBean.getCurrentAirline() == null){
+            this.airline = new Airline();
+        } else{
+            this.airline = airlineBean.getCurrentAirline();
+        }
+
     }
 
     public String submit() {
         System.out.println("ha: in submit function");
-         airlineService.create(airline);
+         airlineBean.save(airline);
         return "airlines";
     }
 }
