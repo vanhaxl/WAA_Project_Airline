@@ -1,10 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 <ui:composition>
-    <header>
-        <h1>Welcome to the WAA Airline</h1>
-    </header>
+    <nav class="navbar navbar-expand navbar-light bg-light">
+        <div class="container">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <h:link value="Airlines" outcome="airlines" styleClass="nav-link"/>
+                    </li>
+                    <li class="nav-item">
+                        <h:link value="Flights" outcome="flights" styleClass="nav-link"/>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!--<header>-->
+        <!--<h1>Welcome to the WAA Airline</h1>-->
+    <!--</header>-->
 </ui:composition>
 </html>

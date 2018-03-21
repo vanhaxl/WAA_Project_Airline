@@ -63,6 +63,7 @@ public class AirlineDetailBean implements Serializable {
     public String submit() {
         airline.setName(name);
         airlineBean.save(airline);
+
         return "airlines";
     }
 }
