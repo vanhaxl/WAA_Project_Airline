@@ -65,7 +65,7 @@
                             <h:selectOneMenu value="${flightBean.airplaneId}" styleClass="form-control">
                                 <f:selectItems value="#{flightBean.airplanes}"
                                                var="c"
-                                               itemLabel="#{c.model}"
+                                               itemLabel="#{c.model} (#{c.serialnr})"
                                                itemValue="#{c.id}"/>
                             </h:selectOneMenu>
                         </ui:fragment>
