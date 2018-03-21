@@ -76,9 +76,9 @@ public class AirportRest {
 	@Path("byarrival/{flightid}")
 	@GET
 	public List<Airport> findByArrival(@PathParam("flightid") long id) {
-		Flight flight= new Flight();
-		flight.setId(id);
-		return airportService.findByArrival(flight);
+		Flight flights= new Flight();
+		flights.setId(id);
+		return airportService.findByArrival(flights);
 
 	}
 
