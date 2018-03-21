@@ -1,9 +1,109 @@
 <ui:composition template="layout.xhtml" xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-                xmlns:f="http://xmlns.jcp.org/jsf/core">
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
     <ui:define name="title">Flights</ui:define>
     <ui:define name="content">
-        FLIGHTS ARE HERE
+        <h:form>
+            <div class="row">
+                <div class="col-3">
+                    <div class="form-group">
+                        <label for="filterType">Filter type:</label>
+                        <h:selectOneMenu value="${flightBean.filterType}" styleClass="form-control" id="filterType">
+                            <f:selectItems value="#{flightBean.filterTypes}"
+                                           var="c"
+                                           itemLabel="#{c.key}"
+                                           itemValue="#{c.value}"/>
+                            <f:ajax event="change" execute="@this" render="@form"/>
+                        </h:selectOneMenu>
+                    </div>
+                </div>
+                <div class="col-9">
+                    <div class="form-group">
+                        <label>Value:</label>
+                        <ui:fragment rendered="#{flightBean.checkFilterType('flightnr')}">
+                            <h:inputText styleClass="form-control" value="#{flightBean.flightnr}" id="flightnr"/>
+                        </ui:fragment>
+                        <ui:fragment rendered="#{flightBean.checkFilterType('departureDateTime')}">
+                            <h:inputText value="#{flightBean.departmentDate}" styleClass="form-control">
+                                <f:convertDateTime pattern="M/d/yy h:m a"/>
+                            </h:inputText>
+                            <small class="form-text text-muted">Ex: 8/30/09 10:10 PM</small>
+                        </ui:fragment>
+                        <ui:fragment rendered="#{flightBean.checkFilterType('arrivalDateTime')}">
+                            <h:inputText value="#{flightBean.arrivalDate}" styleClass="form-control">
+                                <f:convertDateTime pattern="M/d/yy h:m a"/>
+                            </h:inputText>
+                            <small class="form-text text-muted">Ex: 8/30/09 10:10 PM</small>
+                        </ui:fragment>
+                        <ui:fragment rendered="#{flightBean.checkFilterType('airline')}">
+                            <h:selectOneMenu value="${flightBean.airlineId}" styleClass="form-control">
+                                <f:selectItems value="#{flightBean.airlines}"
+                                               var="c"
+                                               itemLabel="#{c.name}"
+                                               itemValue="#{c.id}"/>
+                            </h:selectOneMenu>
+                        </ui:fragment>
+                        <ui:fragment rendered="#{flightBean.checkFilterType('origin')}">
+                            <h:selectOneMenu value="${flightBean.airportId}" styleClass="form-control">
+                                <f:selectItems value="#{flightBean.airports}"
+                                               var="c"
+                                               itemLabel="#{c.name} (#{c.airportcode})"
+                                               itemValue="#{c.id}"/>
+                            </h:selectOneMenu>
+                        </ui:fragment>
+                        <ui:fragment rendered="#{flightBean.checkFilterType('destination')}">
+                            <h:selectOneMenu value="${flightBean.destAirportId}" styleClass="form-control">
+                                <f:selectItems value="#{flightBean.airports}"
+                                               var="c"
+                                               itemLabel="#{c.name} (#{c.airportcode})"
+                                               itemValue="#{c.id}"/>
+                            </h:selectOneMenu>
+                        </ui:fragment>
+                        <ui:fragment rendered="#{flightBean.checkFilterType('airplane')}">
+                            <h:selectOneMenu value="${flightBean.airplaneId}" styleClass="form-control">
+                                <f:selectItems value="#{flightBean.airplanes}"
+                                               var="c"
+                                               itemLabel="#{c.model}"
+                                               itemValue="#{c.id}"/>
+                            </h:selectOneMenu>
+                        </ui:fragment>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    <h:commandButton styleClass="btn btn-primary" value="Search" action="#{flightBean.search}"/>
+                </div>
+            </div>
+        </h:form>
+        <div class="p-1"></div>
+        <h:dataTable value="#{flightBean.flights}" var="flight"
+                     styleClass="table table-striped">
+            <h:column>
+                <f:facet name="header">Airline</f:facet>
+                <h:outputText value="#{flight.airline.name}"></h:outputText>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Flight Number</f:facet>
+                <h:outputText value="#{flight.flightnr}"></h:outputText>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Origin</f:facet>
+                <div><h:outputText value="#{flight.origin.name} (#{flight.origin.airportcode})"></h:outputText>
+                </div>
+                <div><h:outputText value="#{flight.departureDate} #{flight.departureTime}"></h:outputText></div>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Destination</f:facet>
+                <div><h:outputText value="#{flight.destination.name} (#{flight.destination.airportcode})"/></div>
+                <div><h:outputText value="#{flight.departureDate} #{flight.departureTime}"/></div>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Airplane</f:facet>
+                <h:outputText value="#{flight.airplane.model} (Cap: #{flight.airplane.capacity})"/>
+            </h:column>
+        </h:dataTable>
     </ui:define>
 </ui:composition>

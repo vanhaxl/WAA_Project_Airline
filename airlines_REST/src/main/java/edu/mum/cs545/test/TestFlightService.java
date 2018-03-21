@@ -166,7 +166,7 @@ public class TestFlightService {
 
 		SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
 
-		departureDate = df.parse("06/25/2017 7:10 am");
+		departureDate = df.parse("06/25/2017 19:10:00");
 
 		List<Flight> result = flightService.findByDeparture(departureDate);
 
