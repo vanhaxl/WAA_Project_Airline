@@ -5,6 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -19,86 +20,109 @@ import cs545.airline.service.AirportService;
 
 @Named
 @Path("airport")
-//@Consumes({MediaType.APPLICATION_JSON})
-//@Produces({MediaType.APPLICATION_JSON})
+@Consumes({ MediaType.APPLICATION_JSON })
+@Produces({ MediaType.APPLICATION_JSON })
 public class AirportRest {
 	@Inject
-    private AirportService airportService;
-	//creating airport
+	private AirportService airportService;
+
+	// creating airport******************
 	@Path("create")
 	@POST
 	public void create(Airport airport) {
-		 airportService.create(airport);
+		airportService.create(airport);
 	}
-	//deleting airport
-	@Path("delete/{name}")
-    @GET
-	public void delete(@PathParam("name") Airport airport) {
+
+	// deleting airport
+	@Path("delete/{airportid}")
+	@GET
+	public void delete(@PathParam("airportid") long id) {
+		Airport airport = new Airport();
+		airport.setId(id);
+		//Airport airport= airportService.
 		airportService.delete(airport);
 	}
-   // update airport
+	
+	// update airport************************
 	@Path("update")
 	@PUT
 	public Airport update(Airport airport) {
+//		Airport airport = new Airport();
+//		airport.setId(id);
+		
 		return airportService.update(airport);
-		
+
 	}
-		//finding airport
-	@Path("airport/{name}")
-    @GET
-	public Airport find(@PathParam("name") Airport airport) {
+
+	// finding airport***************
+	@Path("find/{airportid}")
+	@GET
+	public Airport find(@PathParam("airportid") long id) {
+		Airport airport = new Airport();
+		airport.setId(id);
 		return airportService.find(airport);
-		
+
 	}
-    //finding airport by code
+
+	// finding airport by code********
 	@Path("bycode/{name}")
-    @GET
-	public Airport findByCode(@PathParam("name")  String airportcode) {
+	@GET
+	public Airport findByCode(@PathParam("name") String airportcode) {
 		return airportService.findByCode(airportcode);
-	
+
 	}
-//find airports by arrival
-	@Path("byarrival/{name}")
-    @GET
-	public List<Airport> findByArrival(@PathParam("name") Flight flight) {
-		return  airportService.findByArrival(flight);
-		
+
+	// find airports by arrival*******************
+	@Path("byarrival/{flightid}")
+	@GET
+	public List<Airport> findByArrival(@PathParam("flightid") long id) {
+		Flight flight= new Flight();
+		flight.setId(id);
+		return airportService.findByArrival(flight);
+
 	}
-// find airports by departure
-	@Path("bydeparture/{name}")
-    @GET
-	public List<Airport> findByDeparture(@PathParam("name") Flight flight) {
-		return  airportService.findByDeparture(flight);
-		
+
+	// find airports by departure************
+	@Path("bydeparture/{flightid}")
+	@GET
+	public List<Airport> findByDeparture(@PathParam("flightid") long id) {
+		Flight flight= new Flight();
+		flight.setId(id);
+		return airportService.findByDeparture(flight);
+
 	}
-// find airports by city
+
+	// find airports by city*********************
 	@Path("bycity/{name}")
-    @GET
+	@GET
 	public List<Airport> findByCity(@PathParam("name") String city) {
 		return airportService.findByCity(city);
-		
+
 	}
-//find airports by country
+
+	// find airports by country*******************
 	@Path("bycountry/{name}")
-    @GET
+	@GET
 	public List<Airport> findByCountry(@PathParam("name") String country) {
 		return airportService.findByCountry(country);
-		
+
 	}
-//find airports by  name 
+
+	// find airports by name *****************
 	@Path("byname/{name}")
-    @GET
+	@GET
 	public List<Airport> findByName(@PathParam("name") String name) {
-		
+
 		return airportService.findByName(name);
-		
+
 	}
-//find all airports 
+
+	// find all airports *****************
 	@Path("all")
 	@GET
 	public List<Airport> findAll() {
-		
+
 		return airportService.findAll();
-		
+
 	}
 }
