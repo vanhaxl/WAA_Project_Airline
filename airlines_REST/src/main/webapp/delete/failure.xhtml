@@ -6,7 +6,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
 <f:view contentType="text/html" contracts="common,device-desktop,theme-#{theme.name}">
-    <ui:composition template="/templates/page-template.xhtml">
+    <ui:composition template="/templates/page-template-delete.xhtml">
         <ui:define name="title">Cannot Delete</ui:define>
         <ui:define name="panel-top">
             <h1>Can Not Delete</h1>
@@ -16,7 +16,7 @@
             <ui:fragment rendered="#{true}">
                 <section>
                     <h:form>
-                        <h:commandButton value="Finish" action="#{delete.finishDelete}" styleClass="button-right"/>
+                        <h:commandButton value="Return" action="#{airlineBean.finishDelete}" styleClass="button-right"/>
                     </h:form>
                 </section>
             </ui:fragment>

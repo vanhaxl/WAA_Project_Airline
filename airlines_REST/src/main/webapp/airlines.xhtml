@@ -36,11 +36,10 @@
                                 <f:facet name="header">Action</f:facet>
 
                                 <h:commandButton value="Update" action="#{airlineDetailBean.updateAirline(airline.id)}" style="margin-left: 0.25em;"/>
-                                <h:commandButton value="Delete" action="#{airlineBean.deleteAirline1(airline.id)}" style="margin-left: 0.25em;"/>
-                                <h:commandButton value="Delete Flow" action="delete" style="margin-left: 0.25em;"/>
+                                <h:commandButton value="Delete" action="#{airlineDetailBean.deleteAirline1(airline.id)}" style="margin-left: 0.25em;"/>
                             </h:column>
-
                         </h:dataTable>
+                        <h:commandButton value="Delete Flow" action="delete" style="margin-left: 0.25em;"/>
                     </h:form>
                 </section>
             </ui:fragment>

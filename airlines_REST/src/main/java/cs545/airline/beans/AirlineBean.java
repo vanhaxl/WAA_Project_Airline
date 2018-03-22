@@ -23,34 +23,16 @@ public class AirlineBean implements Serializable{
     public List<Airline> getAirlines(){
         return airlineService.findAll();
     }
-
     public Airline getCurrentAirline(){
         return this.currentAirline;
-    }
-
-    public String deleteAirline1(long id) {
-        currentAirline = new Airline();
-        currentAirline.setId(id);
-        currentAirline = airlineService.find(currentAirline);
-        if(currentAirline.getFlights().isEmpty()) {
-            airlineService.delete(currentAirline);
-        }
-        return "airlines";
-    }
-    public String deleteAirline(long id) {
-        currentAirline = new Airline();
-        currentAirline.setId(id);
-        currentAirline = airlineService.find(currentAirline);
-        if(currentAirline.getFlights().isEmpty()) {
-            airlineService.delete(currentAirline);
-            return "success";
-        }
-        return "failure";
     }
 
     public String save(Airline airline) {
         airlineService.create(airline);
         return "airlineList";
+    }
+    public String finishDelete(){
+        return "finished";
     }
 
 }

@@ -21,6 +21,15 @@ public class AirlineDetailBean implements Serializable {
     private Airline airline;
    // @NotNull(message="enter something")
     private String name;
+    private boolean deleteSuccess = false;
+
+    public boolean isDeleteSuccess() {
+        return deleteSuccess;
+    }
+
+    public void setDeleteSuccess(boolean deleteSuccess) {
+        this.deleteSuccess = deleteSuccess;
+    }
 
     public String getName() {
         return name;
@@ -55,6 +64,27 @@ public class AirlineDetailBean implements Serializable {
         airline =  new Airline();
         this.name = "";
         return "airline-details";
+    }
+
+    public void deleteAirline(long id) {
+        airline = new Airline();
+        airline.setId(id);
+        airline = airlineService.find(airline);
+        if(airline.getFlights().isEmpty()) {
+            airlineService.delete(airline);
+            deleteSuccess = true;
+        } else{
+            deleteSuccess = false;
+        }
+    }
+    public String deleteAirline1(long id) {
+        airline = new Airline();
+        airline.setId(id);
+        airline = airlineService.find(airline);
+        if(airline.getFlights().isEmpty()) {
+            airlineService.delete(airline);
+        }
+        return "airlines";
     }
 
     public String submit() {

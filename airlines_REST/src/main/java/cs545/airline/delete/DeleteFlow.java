@@ -17,21 +17,21 @@ public class DeleteFlow implements Serializable {
         builder.viewNode("confirm", "/delete/confirmDelete.xhtml").markAsStartNode();
 
         builder.methodCallNode("execute")
-                .expression("#{airlineBean.deleteAirline(airline.id)}")
+                .expression("#{airlineDetailBean.deleteAirline(airline.id)}")
                 .defaultOutcome("check-result");
         builder.switchNode("check-result")
                 .switchCase()
-                .condition("success")
+                .condition("#{airlineDetailBean.deleteSuccess}")
                 .fromOutcome("success")
                 .switchCase()
-                .condition("failure")
+                .condition("#{not airlineDetailBean.deleteSuccess}")
                 .fromOutcome("failure");
 
         builder.viewNode("success", "/delete/success.xhtml");
         builder.viewNode("failure", "/delete/failure.xhtml");
 
         builder.returnNode("finished")
-                .fromOutcome("airlines");
+                .fromOutcome("home");
 
         return builder.getFlow();
     }
