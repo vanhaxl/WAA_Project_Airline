@@ -28,7 +28,7 @@ public class AirlineBean implements Serializable{
         return this.currentAirline;
     }
 
-    public String deleteAirline(long id) {
+    public String deleteAirline1(long id) {
         currentAirline = new Airline();
         currentAirline.setId(id);
         currentAirline = airlineService.find(currentAirline);
@@ -37,12 +37,21 @@ public class AirlineBean implements Serializable{
         }
         return "airlines";
     }
+    public String deleteAirline(long id) {
+        currentAirline = new Airline();
+        currentAirline.setId(id);
+        currentAirline = airlineService.find(currentAirline);
+        if(currentAirline.getFlights().isEmpty()) {
+            airlineService.delete(currentAirline);
+            return "success";
+        }
+        return "failure";
+    }
+
     public String save(Airline airline) {
         airlineService.create(airline);
         return "airlineList";
     }
-
-
 
 }
 

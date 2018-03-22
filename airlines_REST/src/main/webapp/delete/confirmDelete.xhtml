@@ -7,17 +7,12 @@
 
 <f:view contentType="text/html" contracts="common,device-desktop,theme-#{theme.name}">
     <ui:composition template="/templates/page-template.xhtml">
-        <ui:define name="title">Airline Management</ui:define>
+        <ui:define name="title">Confirm Delete Airline</ui:define>
         <ui:define name="panel-top">
-            <h1>Airline Management</h1>
-            <ui:fragment rendered="#{true}">
-                <h:form>
-                    <h:commandLink value="Add new Airline" action="#{airlineDetailBean.createAirline}"  />
-                </h:form>
-            </ui:fragment>
+            <h1>Do you really want to delete the Airline</h1>
         </ui:define>
         <ui:define name="panel-main">
-            <ui:fragment rendered="#{not empty airlineBean.airlines}">
+            <ui:fragment rendered="#{true}">
                 <section>
                     <h:form>
                         <h:dataTable value="#{airlineBean.airlines}" var="airline"
@@ -36,11 +31,13 @@
                                 <f:facet name="header">Action</f:facet>
 
                                 <h:commandButton value="Update" action="#{airlineDetailBean.updateAirline(airline.id)}" style="margin-left: 0.25em;"/>
-                                <h:commandButton value="Delete" action="#{airlineBean.deleteAirline1(airline.id)}" style="margin-left: 0.25em;"/>
-                                <h:commandButton value="Delete Flow" action="delete" style="margin-left: 0.25em;"/>
+                                <h:commandButton value="YES" action="execute" style="margin-left: 0.25em;"/>
+                                <h:commandButton value="NO" action="finished"
+                                                 style="margin-left: 0.25em;"/>
                             </h:column>
 
                         </h:dataTable>
+
                     </h:form>
                 </section>
             </ui:fragment>
